@@ -55,7 +55,7 @@
 	<h2>Hi, ${name}! 👋</h2>
 	<p>Start managing your tasks efficiently.</p>
 
-	<a href="list-todo" class="btn btn-custom">📋 Manage Your Todos</a>
+	<a href="todolist" class="btn btn-custom">📋 Manage Your Todos</a>
 </div>
 
 <%@ include file="common/footer.jspf" %>
