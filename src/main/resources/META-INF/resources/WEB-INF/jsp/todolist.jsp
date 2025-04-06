@@ -58,13 +58,13 @@
     </thead>
 
     <tbody>
-        <c:forEach items = "${todos}" var = "todo">  //use JSTL , todos is a collection(list), var todo is a variable, foreach loops each todos and assign it to todo
+        <c:forEach items = "${todos}" var = "todo">  <!-- use JSTL , todos is a collection(list), var todo is a variable, foreach loops each todos and assign it to todo -->
         <tr>
             <td>${todo.description}</td>
             <td>${todo.targetDate}</td>
             <td>${todo.done}</td>
-            <td><a href="update-todo?id = ${todo.id}" class = "btn btn-warning">Update Todo</a></td>
-            <td><a href ="delete-todo?id = ${todo.id}" class = "btn btn-warning">Delete Todo</a></td>
+            <td><a href="update-todo?id=${todo.id}" class = "btn btn-warning">Update Todo</a></td>
+            <td><a href ="delete-todo?id=${todo.id}" class = "btn btn-warning">Delete Todo</a></td>
         </tr>
 
         </c:forEach>

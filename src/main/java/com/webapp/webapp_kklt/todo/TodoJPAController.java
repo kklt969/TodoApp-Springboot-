@@ -1,17 +1,28 @@
 package com.webapp.webapp_kklt.todo;
 
+import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class TodoJPAController {
 
+    private TodoService todoService;
+
+    public TodoJPAController(TodoService todoService)
+    {
+        this.todoService = todoService;
+    }
 
     public String getloggedinUsername()
     {
@@ -20,9 +31,10 @@ public class TodoJPAController {
     }
 
     @RequestMapping(value = "todolist", method = RequestMethod.GET)
-    public String gotoTodoList()
+    public String gotoTodoList(ModelMap model)
     {
-
+        List<Todo> todos = todoService.getTodosByUsername(getloggedinUsername());
+        model.addAttribute("todos", todos);
         return "todolist";
     }
 
@@ -33,6 +45,55 @@ public class TodoJPAController {
         Todo todo = new Todo(0, username, "Default" , LocalDate.now().plusYears(1), false);
         model.put("todo", todo);
         return "addTodo";
+    }
+
+    @RequestMapping(value = "add-todo", method =  RequestMethod.POST)
+    public String saveTodo(ModelMap model, @Valid Todo todo, BindingResult result)
+    {
+        String username = getloggedinUsername();
+
+      if(result.hasErrors()){
+          return "addTodo";
+      }
+      todo.setUsername(username);
+
+      todoService.saveTodo(todo);
+
+        return "redirect:todolist";
+    }
+
+    @RequestMapping(value = "delete-todo")
+    public String deleteTodo(@RequestParam int id)
+    {
+        todoService.deleteTodo(id);
+        return "redirect:todolist";
+    }
+
+    @RequestMapping(value = "update-todo", method = RequestMethod.GET)
+    public String gotoUpdateTodo(@RequestParam int id, ModelMap model)
+    {
+        
+        Optional<Todo> todo = todoService.getTodoById(id);
+        model.addAttribute("todo",todo);
+
+        return "addTodo";
+
+    }
+    
+    @RequestMapping(value = "update-todo", method = RequestMethod.POST)
+    public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result)
+    {
+    	String username = getloggedinUsername();
+    	
+    	if(result.hasErrors())
+    	{
+    		return "addTodo";
+    		
+    	}
+    	
+    	todo.setUsername(username);
+    	todoService.saveTodo(todo);
+    	return "redirect:todolist";
     }
 
 
