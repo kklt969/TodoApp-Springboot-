@@ -39,6 +39,36 @@ public class TodoService {
     }
 
 
+    public void updateDone(int id)
+    {
+        Boolean done = todoRepository.findDoneById(id);
+        if(!done)
+        {
+            todoRepository.setDoneById(id, true);
+            return;
+        }
+        todoRepository.setDoneById(id, false);
+
+    }
+
+
+    public List<Todo> getCompletedTodo(String username)
+    {
+        return todoRepository.findByUsernameAndDoneTrue(username);
+    }
+
+    public List<Todo> getPendingTodo(String username)
+    {
+        return todoRepository.findByUsernameAndDoneFalse(username);
+    }
+
+    public List<Todo> getTodobyDescription(String description)
+    {
+        return todoRepository.findByDescription(description);
+    }
+
+
+
 
 
 

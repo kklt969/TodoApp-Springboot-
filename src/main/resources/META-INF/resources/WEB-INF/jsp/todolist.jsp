@@ -1,12 +1,23 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 <html>
 <head>
-
-    <link href = "webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel = "stylesheet"></link>
-
-
+    <meta charset="UTF-8">
+    <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Make sure to use a font that supports emojis */
+        body {
+            font-family: system-ui, sans-serif, "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji";
+        }
+        /* If you want only the table cells to show emojis with proper font */
+        td {
+            font-family: system-ui, sans-serif, "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji";
+        }
+    </style>
+    <title>Todo List</title>
 </head>
 
 <body>
@@ -31,11 +42,11 @@
 
         <input type="text" name = "keyword" class = "form-control me-2" placeholder = "Search todos..." value = "${param.keyword}">
 
-        <select name = "status" class = "form=select me-2">
+        <select name = "status" class = "form-select me-2">
 
             <option value="">All</option>
-            <option value="completed" ${param.status == 'completed' ? 'selected' : ''}>Completed</option>
-            <option value = "pending" ${param.status == 'pending' ? 'selected' : ''}>Pending</option>
+            <option value = "completed"  <c:if test = "${param.status == 'completed'}">selected</c:if>>Completed</option>
+            <option value  = "pending" <c:if test="${param.status == 'pending'}">selected</c:if>>Pending</option>
 
         </select>
 
@@ -62,7 +73,28 @@
         <tr>
             <td>${todo.description}</td>
             <td>${todo.targetDate}</td>
-            <td>${todo.done}</td>
+            <td>
+
+                <c:choose>
+
+                    <c:when test = "${todo.done}">
+                        ✅ <a href="toggle-done?id=${todo.id}" class="btn btn-sm btn-outline-success">Mark as Undone</a>
+                    </c:when>
+
+                    <c:otherwise>
+
+                        ❌ <a href= "toggle-done?id=${todo.id}" class = "btn btn-sm btn-outline-secondary">Mark as Done</a>
+
+                    </c:otherwise>
+
+
+
+                </c:choose>
+
+
+
+
+            </td>
             <td><a href="update-todo?id=${todo.id}" class = "btn btn-warning">Update Todo</a></td>
             <td><a href ="delete-todo?id=${todo.id}" class = "btn btn-warning">Delete Todo</a></td>
         </tr>

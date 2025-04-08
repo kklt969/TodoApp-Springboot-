@@ -1,0 +1,35 @@
+[33mcommit 012033e92dfbe548325ff72de5069e7ce8e2fb52[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;32mIteration_2[m[33m)[m
+Author: kklt969 <167519863+kklt969@users.noreply.github.com>
+Date:   Sat Apr 5 17:25:30 2025 -0700
+
+    Todo repository, sql db, basic functions done
+
+[33mcommit e2ae5632762e50bb352d94577df1ee76a758d9d4[m
+Author: kklt969 <167519863+kklt969@users.noreply.github.com>
+Date:   Tue Apr 1 21:08:29 2025 -0700
+
+    add todo jsp , and Todo controller update
+
+[33mcommit b7aedb7cad3f0e2ade4dac50e091867979d6c0d8[m[33m ([m[1;32mIteration_1[m[33m)[m
+Author: kklt969 <167519863+kklt969@users.noreply.github.com>
+Date:   Tue Apr 1 15:52:48 2025 -0700
+
+    Spring security configuration class update, application.properties update, login logic update , login controller
+
+[33mcommit 7297743e96ae06e3c568f1080f3e61d8e0942b20[m
+Author: kklt969 <167519863+kklt969@users.noreply.github.com>
+Date:   Sat Mar 29 22:36:42 2025 -0700
+
+    application.property update
+
+[33mcommit 6dc933854b62d952e23e6680d742adc21a1f00a4[m
+Author: kklt969 <167519863+kklt969@users.noreply.github.com>
+Date:   Sat Mar 29 22:21:01 2025 -0700
+
+    Todo Entity Class
+
+[33mcommit d7dcea4821a272e5d99b0c36a7861ef46651c4ed[m
+Author: kklt969 <167519863+kklt969@users.noreply.github.com>
+Date:   Sat Mar 29 20:29:00 2025 -0700
+
+    Initial commit

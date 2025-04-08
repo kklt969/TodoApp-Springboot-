@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,11 +32,38 @@ public class TodoJPAController {
     }
 
     @RequestMapping(value = "todolist", method = RequestMethod.GET)
-    public String gotoTodoList(ModelMap model)
-    {
-        List<Todo> todos = todoService.getTodosByUsername(getloggedinUsername());
-        model.addAttribute("todos", todos);
-        return "todolist";
+    public String gotoTodoList(@RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "") String status, ModelMap model) {
+        String toReturn = "todolist";
+        String username = getloggedinUsername();
+        List<Todo> todos = new ArrayList<>();
+        if ((keyword.equals("") &&  status.equals(""))) {
+             todos = todoService.getTodosByUsername(username);
+
+
+        }
+
+        else if(status.equals("pending") && keyword.isEmpty())
+        {
+            todos = todoService.getPendingTodo(username);
+        }
+
+        else if (status.equals("completed") && keyword.isEmpty())
+        {
+            todos = todoService.getCompletedTodo(username);
+
+        }
+
+        else if(!keyword.isEmpty())
+        {
+            todos = todoService.getTodobyDescription(keyword);
+        }
+
+        model.addAttribute("todos",todos);
+
+
+
+
+        return toReturn;
     }
 
     @RequestMapping(value = "add-todo")
@@ -95,6 +123,15 @@ public class TodoJPAController {
     	todoService.saveTodo(todo);
     	return "redirect:todolist";
     }
+
+    @RequestMapping(value =  "toggle-done")
+    public String updateDone(@RequestParam int id)
+    {
+        todoService.updateDone(id);
+        return "redirect:todolist";
+    }
+
+
 
 
 
