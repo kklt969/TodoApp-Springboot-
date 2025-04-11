@@ -39,26 +39,33 @@ public class TodoJPAController {
         if ((keyword.equals("") &&  status.equals(""))) {
              todos = todoService.getTodosByUsername(username);
 
-
         }
 
-        else if(status.equals("pending") && keyword.isEmpty())
+        else if(status.equals("pending"))
         {
             todos = todoService.getPendingTodo(username);
         }
 
-        else if (status.equals("completed") && keyword.isEmpty())
+        else if (status.equals("completed"))
         {
             todos = todoService.getCompletedTodo(username);
 
         }
 
-        else if(!keyword.isEmpty())
+
+        else if(!keyword.isEmpty() && status.equals("description"))
         {
             todos = todoService.getTodobyDescription(keyword);
         }
 
+        else if(!keyword.isEmpty() && status.equals("targetDate"))
+        {
+            LocalDate date = LocalDate.parse(keyword);
+            todos = todoService.getTodoByTargetDate(date);
+        }
+
         model.addAttribute("todos",todos);
+
 
 
 

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface TodoRepository extends  JpaRepository<Todo, Integer>
@@ -25,6 +26,8 @@ public interface TodoRepository extends  JpaRepository<Todo, Integer>
     public List<Todo>findByUsernameAndDoneFalse(String username);
 
     public List<Todo> findByDescription(String description);
+
+    public List<Todo> findByTargetDate(LocalDate targetDate);
 
 
 }

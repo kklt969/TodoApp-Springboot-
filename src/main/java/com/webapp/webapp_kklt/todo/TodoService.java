@@ -2,6 +2,7 @@ package com.webapp.webapp_kklt.todo;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +68,11 @@ public class TodoService {
         return todoRepository.findByDescription(description);
     }
 
+
+    public List<Todo> getTodoByTargetDate(LocalDate targetDate)
+    {
+        return todoRepository.findByTargetDate(targetDate);
+    }
 
 
 

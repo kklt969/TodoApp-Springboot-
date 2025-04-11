@@ -47,6 +47,9 @@
             <option value="">All</option>
             <option value = "completed"  <c:if test = "${param.status == 'completed'}">selected</c:if>>Completed</option>
             <option value  = "pending" <c:if test="${param.status == 'pending'}">selected</c:if>>Pending</option>
+            <option value = "description" <c:if test = "${param.status == 'description'}">selected</c:if>>Description (type in the box)</option>
+            <option value = "targetDate" <c:if test = "${param.status == 'targetDate'}">selected</c:if>>Target Date YYYY-MM-DD (type in the box)</option>
+
 
         </select>
 
